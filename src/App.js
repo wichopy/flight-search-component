@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+import FlightForm from "./FlightForm";
 /*
   Use Material UI for its nice composibility api and hooks
     Noeably I wanted the userMediaQuery hook
@@ -54,7 +55,7 @@ function App() {
   const classes = useStyles();
   const theme = useTheme();
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
-  const md = useMediaQuery(theme.breakpoints.up("md"));
+  // const md = useMediaQuery(theme.breakpoints.up("md"));
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -78,44 +79,6 @@ function App() {
     }
   };
 
-  let tabs = [
-    <Tab label="Flights" />,
-    <Tab label="Vacations" className={classes.secondaryTab} />,
-    <Tab label="Flight Passes" className={classes.secondaryTab} />,
-    <Tab label="Hotels" className={classes.secondaryTab} />,
-    <Tab label="Cars" className={classes.secondaryTab} />,
-    <Tab label="My Bookings" className={classes.secondaryTab} />,
-    <Tab label="Check in" />,
-    <Tab label="Flight Status" />
-  ];
-
-  let tabPanels = [
-    <TabPanel value={value} index={0} dir={theme.direction}>
-      Pick your flight
-    </TabPanel>,
-    <TabPanel value={value} index={1} dir={theme.direction}>
-      Vacations
-    </TabPanel>,
-    <TabPanel value={value} index={2} dir={theme.direction}>
-      Flight Passes
-    </TabPanel>,
-    <TabPanel value={value} index={3} dir={theme.direction}>
-      Hotels
-    </TabPanel>,
-    <TabPanel value={value} index={4} dir={theme.direction}>
-      Cars
-    </TabPanel>,
-    <TabPanel value={value} index={5} dir={theme.direction}>
-      My bookings
-    </TabPanel>,
-    <TabPanel value={value} index={6} dir={theme.direction}>
-      Check in
-    </TabPanel>,
-    <TabPanel value={value} index={7} dir={theme.direction}>
-      Flight Status
-    </TabPanel>
-  ];
-
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -127,7 +90,14 @@ function App() {
           variant="fullWidth"
           aria-label="Search Tabs"
         >
-          {tabs}
+          <Tab label="Flights" />
+          <Tab label="Vacations" className={classes.secondaryTab} />
+          <Tab label="Flight Passes" className={classes.secondaryTab} />
+          <Tab label="Hotels" className={classes.secondaryTab} />
+          <Tab label="Cars" className={classes.secondaryTab} />
+          <Tab label="My Bookings" className={classes.secondaryTab} />
+          <Tab label="Check in" />
+          <Tab label="Flight Status" />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -135,7 +105,30 @@ function App() {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        {tabPanels}
+        <TabPanel value={value} index={0} dir={theme.direction}>
+          <FlightForm />
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
+          Vacations
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          Flight Passes
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+          Hotels
+        </TabPanel>
+        <TabPanel value={value} index={4} dir={theme.direction}>
+          Cars
+        </TabPanel>
+        <TabPanel value={value} index={5} dir={theme.direction}>
+          My bookings
+        </TabPanel>
+        <TabPanel value={value} index={6} dir={theme.direction}>
+          Check in
+        </TabPanel>
+        <TabPanel value={value} index={7} dir={theme.direction}>
+          Flight Status
+        </TabPanel>
       </SwipeableViews>
     </div>
   );
