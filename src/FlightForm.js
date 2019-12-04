@@ -61,6 +61,14 @@ function ItineraryItem({
   );
 }
 
+function ItineraryConfirmationRow({ from, to, date }) {
+  return (
+    <p>
+      {from} to {to} on {date && format(date, "yyyy-MM-dd")}
+    </p>
+  );
+}
+
 export default function FlightForm() {
   // Hooks
   const [itinerary, setItinerary] = React.useState({
@@ -225,23 +233,26 @@ export default function FlightForm() {
           <DialogContent>
             <Typography variant="h2">Your Itinerary</Typography>
             <br />
-            <p>
-              {itinerary[0].from} to {itinerary[0].to} on{" "}
-              {itinerary[0].date && format(itinerary[0].date, "yyyy-MM-dd")}
-            </p>
+            <ItineraryConfirmationRow
+              from={itinerary[0].from}
+              to={itinerary[0].to}
+              date={itinerary[0].date}
+            />
             {tripType === "roundTrip" && (
-              <p>
-                {itinerary[0].to} to {itinerary[0].from} on{" "}
-                {itinerary[1].date && format(itinerary[1].date, "yyyy-MM-dd")}
-              </p>
+              <ItineraryConfirmationRow
+                from={itinerary[0].to}
+                to={itinerary[0].from}
+                date={itinerary[1].date}
+              />
             )}
             {tripType === "multiCity" &&
               multiCityItems().map(itin => {
                 return (
-                  <p>
-                    {itin.to} to {itin.from} on{" "}
-                    {itin.date && format(itin.date, "yyyy-MM-dd")}
-                  </p>
+                  <ItineraryConfirmationRow
+                    from={itin.from}
+                    to={itin.to}
+                    date={itin.date}
+                  />
                 );
               })}
           </DialogContent>
